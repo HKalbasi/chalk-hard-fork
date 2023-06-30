@@ -62,8 +62,10 @@ jobs:
                          --template releases-template.hbs
 
           # Commit and publish
+          git status
           git commit -am "Release $VERSION"
           git tag "v$VERSION"
+          git status
           cargo workspaces -v publish --from-git --skip-published
           git push --tags
           cargo workspaces -v version -ay --force '*' --include-merged-tags --no-git-tag --pre-id dev preminor
